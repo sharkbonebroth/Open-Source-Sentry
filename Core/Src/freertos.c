@@ -65,11 +65,20 @@ const osThreadAttr_t high2_priority_task_attributes = {
 
 /* USER CODE END PM */
 
+/* Definitions for defaultTask */
+osThreadId_t defaultTaskHandle;
+const osThreadAttr_t defaultTask_attributes = {
+  .name = "defaultTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 
 osThreadId_t GimbalControlTaskHandle;
 osThreadId_t MovementControlTaskHandle;
+osThreadId_t RefereeProcessingTaskHandle;
 
 /* USER CODE END Variables */
 
