@@ -22,14 +22,36 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "main.h"
+#include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "GimbalControlTask.h"
+#include "MovementControlTask.h"
+#include "RefereeProcessingTask.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+
+//Thread attributes, Low <-> High
+const osThreadAttr_t low_priority_task_attributes = {
+		.name = "low_priority_task",
+		.priority = (osPriority_t) osPriorityLow
+};
+const osThreadAttr_t low2_priority_task_attributes = {
+		.name = "low2_priority_task",
+		.priority = (osPriority_t) osPriorityLow2
+};
+const osThreadAttr_t high_priority_task_attributes = {
+    .name = "high_priority_task",
+    .priority = (osPriority_t) osPriorityHigh
+};
+
+const osThreadAttr_t high2_priority_task_attributes = {
+    .name = "high2_priority_task",
+    .priority = (osPriority_t) osPriorityHigh2
+};
 
 /* USER CODE END PTD */
 
@@ -45,6 +67,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+
+osThreadId_t GimbalControlTaskHandle;
+osThreadId_t MovementControlTaskHandle;
 
 /* USER CODE END Variables */
 

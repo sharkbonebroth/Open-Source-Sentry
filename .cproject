@@ -94,6 +94,10 @@
                                     <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2"/>
                                     									
                                     <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/OpenSourceSentry/Core/BSP/Inc}&quot;"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/OpenSourceSentry/Core/Tasks/Inc}&quot;"/>
                                     								
                                 </option>
                                 								
