@@ -1,0 +1,10 @@
+motor_control.c:15:6:speed_pid	64	static
+motor_control.c:37:6:angle_pid	56	static
+motor_control.c:67:6:CANone_cmd	64	static
+motor_control.c:98:6:CANtwo_cmd	32	static
+motor_control.c:126:6:ki_limit	16	static
+motor_control.c:145:6:motor_minmax	24	static
+motor_control.c:164:6:motor_limit	16	static
+motor_control.c:177:6:int_limit	16	static
+motor_control.c:192:6:double_limit	40	static
+motor_control.c:210:6:reset_pid	16	static

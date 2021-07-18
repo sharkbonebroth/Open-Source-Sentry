@@ -17,6 +17,7 @@ RM := rm -rf
 -include Core/Tasks/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
+-include Core/BSP/Src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -40,34 +41,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := OpenSourceSentry
+BUILD_ARTIFACT_NAME := OS_sentry
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-OpenSourceSentry.elf \
+OS_sentry.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-OpenSourceSentry.list \
+OS_sentry.list \
 
 OBJCOPY_BIN += \
-OpenSourceSentry.bin \
+OS_sentry.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: OpenSourceSentry.elf secondary-outputs
+main-build: OS_sentry.elf secondary-outputs
 
 # Tool invocations
-OpenSourceSentry.elf: $(OBJS) $(USER_OBJS) C:\Users\Zheng\ Hao\ Chin\STM32CubeIDE\workspace_1.6.1\OpenSourceSentry\STM32F427IIHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "OpenSourceSentry.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Zheng Hao Chin\STM32CubeIDE\workspace_1.6.1\OpenSourceSentry\STM32F427IIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="OpenSourceSentry.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+OS_sentry.elf: $(OBJS) $(USER_OBJS) C:\Users\Zheng\ Hao\ Chin\OneDrive\Desktop\Uni\Robomasters\OS_Sentry\STM32F427IIHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "OS_sentry.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Zheng Hao Chin\OneDrive\Desktop\Uni\Robomasters\OS_Sentry\STM32F427IIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="OS_sentry.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -76,13 +77,13 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-OpenSourceSentry.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "OpenSourceSentry.list"
+OS_sentry.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "OS_sentry.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-OpenSourceSentry.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "OpenSourceSentry.bin"
+OS_sentry.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "OS_sentry.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 

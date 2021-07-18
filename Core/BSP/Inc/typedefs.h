@@ -57,12 +57,10 @@ typedef struct {
 
 
 typedef struct {
-	motor_data_t chassis_motors[4];
-	motor_data_t leftfriction;
-	motor_data_t rightfriction;
-	motor_data_t feeder;
-	gimbal_data_t pitch;
-	gimbal_data_t yaw;
+	motor_data_t 	CHASSIS;
+	motor_data_t 	FEEDER[2];
+	gimbal_data_t 	pitch;
+	gimbal_data_t 	yaw;
 } can_data_t;
 
 

@@ -1,0 +1,3 @@
+bsp_usart.c:13:19:usart_send_data	24	static
+bsp_usart.c:20:6:HAL_UART_RxCpltCallback	16	static
+bsp_usart.c:24:19:xavier_usart_start	32	static

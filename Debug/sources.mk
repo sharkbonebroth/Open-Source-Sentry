@@ -20,6 +20,7 @@ OBJCOPY_BIN :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Core/BSP/Src \
 Core/Src \
 Core/Startup \
 Core/Tasks/Src \

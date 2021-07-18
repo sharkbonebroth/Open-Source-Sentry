@@ -1,0 +1,2 @@
+rc_input.c:24:6:dbus_remote_ISR	16	static
+rc_input.c:58:6:dbus_reset	4	static

@@ -1,1 +1,0 @@
-void GimbalControlTask(void *argument);

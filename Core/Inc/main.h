@@ -10,10 +10,10 @@
   * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
   *
   ******************************************************************************
   */
@@ -58,6 +58,24 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define IST_INT_Pin GPIO_PIN_3
+#define IST_INT_GPIO_Port GPIOE
+#define IST_INT_EXTI_IRQn EXTI3_IRQn
+#define MPU_INT_Pin GPIO_PIN_8
+#define MPU_INT_GPIO_Port GPIOB
+#define MPU_INT_EXTI_IRQn EXTI9_5_IRQn
+#define PWR_A_Pin GPIO_PIN_2
+#define PWR_A_GPIO_Port GPIOH
+#define PWR_B_Pin GPIO_PIN_3
+#define PWR_B_GPIO_Port GPIOH
+#define PWR_C_Pin GPIO_PIN_4
+#define PWR_C_GPIO_Port GPIOH
+#define PWR_D_Pin GPIO_PIN_5
+#define PWR_D_GPIO_Port GPIOH
+#define LED_R_Pin GPIO_PIN_11
+#define LED_R_GPIO_Port GPIOE
+#define LED_G_Pin GPIO_PIN_14
+#define LED_G_GPIO_Port GPIOF
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
