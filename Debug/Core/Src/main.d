@@ -42,7 +42,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/can.h ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/spi.h \
  ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/startup_task.h
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/startup_task.h
 
 ../Core/Inc/main.h:
 
@@ -142,4 +142,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Inc/gpio.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/startup_task.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/startup_task.h:

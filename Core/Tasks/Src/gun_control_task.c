@@ -52,11 +52,17 @@ void gun_control_task(void *argument)
 				dbus_reset();
 			}
 			//not sure what the condition is and if kill switch is necessary
-			if(remote_cmd.right_switch == gimbal_on) //All on
+			if(remote_cmd.right_switch == gimbal_on) //at the middle position
 			{
 				osEventFlagsWait(gun_data_flag, 0x10, osFlagsWaitAll, 100);
 				launcher_control(canone_data.FEEDER);
 				osEventFlagsClear(gun_data_flag, 0x10);
+			}
+			else
+			{
+				pwm_output(-1, 0);
+				CANone_cmd(0,0,0,0, LAUNCHER_ID);
+
 			}
 			//delays task for other tasks to run, CHECK THE VALUE
 			vTaskDelay(CHASSIS_DELAY);
@@ -66,7 +72,7 @@ void gun_control_task(void *argument)
 
 void launcher_control(motor_data_t *feeders)
 {
-	if (remote_cmd.left_switch == launcher_on)
+	if (remote_cmd.left_switch == launcher_on )
 	{
 
 		int16_t feeder_output[2];

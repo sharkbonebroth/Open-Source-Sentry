@@ -65,10 +65,10 @@ enum right_switch
 #define FEEDER_KP 			0.10			// |
 #define FEEDER_KI  			0				// | - FEEDER PID VALUES
 #define FEEDER_KD  			6				// |
-#define FEEDER_SPEED  		100				//	Feeder speed. Multiply by number of slots in the feeder to get how many projectiles per minute
+#define FEEDER_SPEED  		10				//	Feeder speed. Multiply by number of slots in the feeder to get how many projectiles per minute
 #define FEEDER_JAM_TORQUE  	7000			//	Torque before feeder deemed to be jammed
 #define FEEDER_MAX_CURRENT	8000			//  Max value to be sent to motors. M2006 max value can be 10000
-#define FEEDER_UNJAM_SPD  	-50				//	Reverse unjam speed
+#define FEEDER_UNJAM_SPD  	-5				//	Reverse unjam speed
 #define FEEDER_UNJAM_TIME	500
 
 #define FRICTION_KP  		0.1				// |
@@ -118,15 +118,17 @@ enum right_switch
 #define PITCH_INVERT  		-1				//1 to invert control -1 to disable
 
 #define PITCH_KP	  		0.1				// |
-#define PITCH_KD  			80				// | - GIMBAL PID VALUES
+#define PITCH_KD  			10				// | - GIMBAL PID VALUES (from 80)
 #define PITCH_KI  			0				// |
 #define PITCH_SPEED 	 	0.01			//Speed of gimbal pitch control turning
 #define PITCH_MAX_RPM		120				//Max pitch RPM
-#define PITCH_CENTER		528
+#define PITCH_CENTER		4096
 #define PITCH_MAX_CURRENT	20000
+#define PITCH_MAX_ANGLE		1.6
+#define PITCH_MIN_ANGLE		-1.6
 
 #define YAW_KP				0.1
-#define YAW_KD				100
+#define YAW_KD				10
 #define YAW_KI				0
 #define YAW_SPEED 	 		0.01 			//Speed of gimbal yaw control turning
 #define YAW_MAX_RPM			120				//Max yaw RPM

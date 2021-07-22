@@ -73,8 +73,8 @@ void startup_task()
 	canone_data.pitch.calib 		= 1;
 	canone_data.pitch.rpm_max 		= PITCH_MAX_RPM;
 	canone_data.pitch.center_ang 	= PITCH_CENTER;
-	canone_data.pitch.max_ang 		= 0.56;
-	canone_data.pitch.min_ang		= -0.2;
+	canone_data.pitch.max_ang 		= PITCH_MAX_ANGLE;
+	canone_data.pitch.min_ang		= PITCH_MIN_ANGLE;
 
 	canone_data.yaw.pid.max_out			= YAW_MAX_CURRENT;
 	canone_data.yaw.pid.kp 				= YAW_KP;

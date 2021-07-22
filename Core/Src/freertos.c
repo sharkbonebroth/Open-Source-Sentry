@@ -31,6 +31,7 @@
 #include "startup_task.h"
 #include "gimbal_control_task.h"
 #include "movement_control_task.h"
+#include "gun_control_task.h"
 #include "robot_config.h"
 
 /* USER CODE END Includes */
@@ -92,6 +93,7 @@ osMessageQueueId_t m_gun_output;
 //Input control task definitions
 osThreadId_t gimbal_control_task_handle;
 osThreadId_t movement_control_task_handle;
+osThreadId_t gun_control_task_handle;
 
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
@@ -157,7 +159,7 @@ void MX_FREERTOS_Init(void) {
   //Threads creation
   	gimbal_control_task_handle   = osThreadNew(gimbal_control_task, NULL, &high2_priority_task_attributes);
   	movement_control_task_handle = osThreadNew(movement_control_task, NULL, &high_priority_task_attributes);//run now
-
+  	gun_control_task_handle = osThreadNew(gun_control_task, NULL, &high_priority_task_attributes);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */

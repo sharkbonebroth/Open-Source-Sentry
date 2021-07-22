@@ -57,7 +57,7 @@ void dbus_remote_ISR(DMA_HandleTypeDef *hdma) {
 
 void dbus_reset()
 {
-	remote_cmd.right_switch = 0;
+	HAL_UART_DMAPause(&huart1);
 	remote_cmd.right_x = 0;
 	remote_cmd.right_y = 0;
 	remote_cmd.left_x = 0;
@@ -70,5 +70,5 @@ void dbus_reset()
 	remote_cmd.mouse_right = (remote_raw_data[13]);
 	pitch = 0;
 	yaw = 0;
+	HAL_UART_DMAResume(&huart1);
 }
-

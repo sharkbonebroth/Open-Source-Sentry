@@ -83,43 +83,51 @@ void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 
 	//todo: add in roll compensation
 
-	if (remote_cmd.left_switch == launcher_off || xavier_data.last_time + XAVIER_TIMEOUT < HAL_GetTick())
+	//changed from: if (remote_cmd.left_switch == a || xavier_data.last_time + XAVIER_TIMEOUT < HAL_GetTick())
+	if (remote_cmd.right_switch == all_on || remote_cmd.right_switch == gimbal_on)
 	{
 		pitch += (float)remote_cmd.right_y/660 * PITCH_SPEED * PITCH_INVERT;
 		yaw += (float)remote_cmd.right_x/660 * YAW_SPEED * YAW_INVERT;
 		aimbot_mode = 0;
-	}
-	/**
-	else if (remote_cmd.left_switch == aimbot_enable || aimbot_mode == 1)
-	{
-		aimbot_mode = 1;
-		pitch += (float)xavier_data.pitch/660 * PITCH_SPEED * PITCH_INVERT;
-		yaw += (float)xavier_data.yaw/660 * YAW_SPEED * YAW_INVERT;
-	}
-	**/
 
-	if (pitch > pitch_motor->max_ang)
-	{
-		pitch = pitch_motor->max_ang;
-	}
-	if (pitch < pitch_motor->min_ang)
-	{
-		pitch = pitch_motor->min_ang;
-	}
+		/**
+		else if (remote_cmd.left_switch == aimbot_enable || aimbot_mode == 1)
+		{
+			aimbot_mode = 1;
+			pitch += (float)xavier_data.pitch/660 * PITCH_SPEED * PITCH_INVERT;
+			yaw += (float)xavier_data.yaw/660 * YAW_SPEED * YAW_INVERT;
+		}
+		**/
+
+		if (pitch > pitch_motor->max_ang)
+		{
+			pitch = pitch_motor->max_ang;
+		}
+		if (pitch < pitch_motor->min_ang)
+		{
+			pitch = pitch_motor->min_ang;
+		}
 
 
-	if (yaw > yaw_motor->max_ang)
-	{
-		yaw = yaw_motor->max_ang;
-	}	if (yaw < yaw_motor->min_ang)
-	{
-		yaw = yaw_motor->min_ang;
-	}
+		if (yaw > yaw_motor->max_ang)
+		{
+			yaw = yaw_motor->max_ang;
+		}
+		if (yaw < yaw_motor->min_ang)
+		{
+			yaw = yaw_motor->min_ang;
+		}
 
-	//todo add in gimbal control logicz
-	angle_pid(pitch, pitch_motor->adj_ang, pitch_motor);
-	angle_pid(yaw, yaw_motor->adj_ang, yaw_motor);
-	CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
+		//todo add in gimbal control logicz
+		angle_pid(pitch, pitch_motor->adj_ang, pitch_motor);
+		angle_pid(yaw, yaw_motor->adj_ang, yaw_motor);
+		CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
+	}
+	//kill condition
+	else
+	{
+		CANtwo_cmd(0, 0, 0, 0, GIMBAL_ID);
+	}
 }
 
 

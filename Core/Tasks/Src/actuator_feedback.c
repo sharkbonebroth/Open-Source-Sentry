@@ -59,10 +59,10 @@ void can_ISR(CAN_HandleTypeDef *hcan)
 /*
  * MOTOR IDS				PHYSICAL ID		ARRAY NO.
  * 0x201 -> ID_CHASSIS	 	ID1				0
- * 0x205 -> ID_FEEDER_R		ID2				1
- * 0x206 -> ID_FEEDER_L		ID3				2
- * 0x209 -> ID_PITCH		ID4				3
- * 0x20A -> ID_YAW			ID5				4
+ * 0x205 -> ID_FEEDER_R		ID5				1
+ * 0x206 -> ID_FEEDER_L		ID6				2
+ * 0x209 -> ID_PITCH		ID5	(on can2)	3
+ * 0x20A -> ID_YAW			ID6	(on can2)   4
  *
  * Converts raw CAN data over to the motor_data_t struct
  * 7 bytes of CAN data is sent from the motors:

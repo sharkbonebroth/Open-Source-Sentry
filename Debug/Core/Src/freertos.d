@@ -40,29 +40,30 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_lib.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/board_lib.h \
  ../Core/Inc/arm_math.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_settings.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/typedefs.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_dbus_input.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/board_settings.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/typedefs.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_dbus_input.h \
  ../Core/Inc/usart.h ../Core/Inc/main.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_usart.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_referee.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_can.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_usart.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_referee.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_can.h \
  ../Core/Inc/can.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_led.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_led.h \
  ../Core/Inc/gpio.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_oled.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_oled.h \
  ../Core/Inc/spi.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_imu.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/ist8310_reg.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/mpu6500_reg.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_buzzer.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_imu.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/ist8310_reg.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/mpu6500_reg.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_buzzer.h \
  ../Core/Inc/tim.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/startup_task.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/gimbal_control_task.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/movement_control_task.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/robot_config.h
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/startup_task.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/gimbal_control_task.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/movement_control_task.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/gun_control_task.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/robot_config.h
 
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -148,50 +149,52 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_lib.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/board_lib.h:
 
 ../Core/Inc/arm_math.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_settings.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/board_settings.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/typedefs.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/typedefs.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_dbus_input.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_dbus_input.h:
 
 ../Core/Inc/usart.h:
 
 ../Core/Inc/main.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_usart.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_usart.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_referee.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_referee.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_can.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_can.h:
 
 ../Core/Inc/can.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_led.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_led.h:
 
 ../Core/Inc/gpio.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_oled.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_oled.h:
 
 ../Core/Inc/spi.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_imu.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_imu.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/ist8310_reg.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/ist8310_reg.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/mpu6500_reg.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/mpu6500_reg.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_buzzer.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_buzzer.h:
 
 ../Core/Inc/tim.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/startup_task.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/startup_task.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/gimbal_control_task.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/gimbal_control_task.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/movement_control_task.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/movement_control_task.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/robot_config.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/gun_control_task.h:
+
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/Tasks/Inc/robot_config.h:

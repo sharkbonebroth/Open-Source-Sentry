@@ -1,6 +1,6 @@
 Core/BSP/Src/bsp_dbus_input.o: ../Core/BSP/Src/bsp_dbus_input.c \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_settings.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_dbus_input.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/board_settings.h \
+ C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_dbus_input.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -33,9 +33,9 @@ Core/BSP/Src/bsp_dbus_input.o: ../Core/BSP/Src/bsp_dbus_input.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/usart.h ../Core/Inc/main.h
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_settings.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/board_settings.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_dbus_input.h:
+C:/Users/yanli/OneDrive\ -\ National\ University\ of\ Singapore/Robomasters/firmware/Open-Source-Sentry/Core/BSP/Inc/bsp_dbus_input.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
