@@ -48,7 +48,6 @@ void usart_ISR(UART_HandleTypeDef *UartHandle)
 	}
 }
 
-
 /**
  *
  * FreeRTOS task for gimbal controls
@@ -65,7 +64,6 @@ void gimbal_control_task(void *argument)
     }
    	osThreadTerminate(NULL);
 }
-
 
 /**
  * This function controls the gimbals based on motor's centered angle reading
