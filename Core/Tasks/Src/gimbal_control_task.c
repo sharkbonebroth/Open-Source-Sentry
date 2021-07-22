@@ -65,7 +65,6 @@ void gimbal_control_task(void *argument)
    	osThreadTerminate(NULL);
 }
 
-
 /**
  * This function controls the gimbals based on motor's centered angle reading
  * @param 	pitch_motor		Pointer to pitch motor struct
