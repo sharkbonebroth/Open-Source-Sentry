@@ -76,54 +76,31 @@ void gimbal_control_task(void *argument)
  * still provides a fast enough response for open source robots
  */
 
-
 void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 {
-	//changed from: if (remote_cmd.left_switch == a || xavier_data.last_time + XAVIER_TIMEOUT < HAL_GetTick())
-	if (remote_cmd.right_switch == all_on || remote_cmd.right_switch == gimbal_on) //gimbal is only activated if right switch is mid/bot pos
+	if (remote_cmd.right_switch == all_off)
 	{
-		pitch += (float)remote_cmd.right_y/660 * PITCH_SPEED * PITCH_INVERT;
-		yaw += (float)remote_cmd.right_x/660 * YAW_SPEED * YAW_INVERT;
-		aimbot_mode = 0;
-
-		/**
-		else if (remote_cmd.left_switch == aimbot_enable || aimbot_mode == 1)
+		CANtwo_cmd(0, 0, 0, 0, GIMBAL_ID);
+	}
+	else
+	{
+		if (remote_cmd.left_switch == aimbot_enable && xavier_data.last_time + XAVIER_TIMEOUT > HAL_GetTick() )
 		{
-			aimbot_mode = 1;
 			pitch += (float)xavier_data.pitch/660 * PITCH_SPEED * PITCH_INVERT;
 			yaw += (float)xavier_data.yaw/660 * YAW_SPEED * YAW_INVERT;
 		}
-		**/
+		else
+		{
+			pitch += (float)remote_cmd.right_y/660 * PITCH_SPEED * PITCH_INVERT;
+			yaw += (float)remote_cmd.right_x/660 * YAW_SPEED * YAW_INVERT;
+		}
 		pitch = fmax(pitch_motor->min_ang,fmin(pitch_motor->max_ang,pitch));
 		yaw = fmax(yaw_motor->min_ang,fmin(yaw_motor->max_ang,pitch));
-		/*if (pitch > pitch_motor->max_ang)
-		{
-			pitch = pitch_motor->max_ang;
-		}
-		if (pitch < pitch_motor->min_ang)
-		{
-			pitch = pitch_motor->min_ang;
-		}
-
-		if (yaw > yaw_motor->max_ang)
-		{
-			yaw = yaw_motor->max_ang;
-		}
-		if (yaw < yaw_motor->min_ang)
-		{
-			yaw = yaw_motor->min_ang;
-		}*/
-
-		//todo add in gimbal control logicz
 		angle_pid(pitch, pitch_motor->adj_ang, pitch_motor);
 		angle_pid(yaw, yaw_motor->adj_ang, yaw_motor);
 		CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
 	}
-	//Kill switch = right switch at top position
-	else
-	{
-		CANtwo_cmd(0, 0, 0, 0, GIMBAL_ID);
-	}
+
 }
 
 

@@ -11,7 +11,6 @@
 #include "rc_input.h"
 #include "arm_math.h"
 #include "gun_control_task.h"
-
 extern can_data_t canone_data;
 extern remote_cmd_t remote_cmd;
 extern osEventFlagsId_t gun_data_flag;
@@ -51,19 +50,9 @@ void gun_control_task(void *argument)
 			{
 				dbus_reset();
 			}
-			//not sure what the condition is and if kill switch is necessary
-			if(remote_cmd.right_switch == gimbal_on) //at the middle position
-			{
-				osEventFlagsWait(gun_data_flag, 0x10, osFlagsWaitAll, 100);
-				launcher_control(canone_data.FEEDER);
-				osEventFlagsClear(gun_data_flag, 0x10);
-			}
-			else
-			{
-				pwm_output(-1, 0);
-				CANone_cmd(0,0,0,0, LAUNCHER_ID);
-
-			}
+			osEventFlagsWait(gun_data_flag, 0x10, osFlagsWaitAll, 100);
+			launcher_control(canone_data.FEEDER);
+			osEventFlagsClear(gun_data_flag, 0x10);
 			//delays task for other tasks to run, CHECK THE VALUE
 			vTaskDelay(CHASSIS_DELAY);
 	}
@@ -72,11 +61,17 @@ void gun_control_task(void *argument)
 
 void launcher_control(motor_data_t *feeders)
 {
-	if (remote_cmd.left_switch == launcher_on )
+	//Priority of switches, kill switch -> aimbot mode -> manual mode
+	if (remote_cmd.right_switch == all_off )
 	{
-
+		pwm_output(-1, 0);
+		CANone_cmd(0,0,0,0, LAUNCHER_ID);
+	}
+	//TODO: Add in aimbot mode before this condition
+	//TODO: CHECK UNJAMMING FEATURE
+	else if(remote_cmd.left_switch == launcher_on)
+	{
 		int16_t feeder_output[2];
-
 		for (int i = 0; i < 2; i++)
 		{
 			//Remember to change one of the motor direction according to data sheet since PWM cannot change direction.
@@ -112,7 +107,7 @@ void launcher_control(motor_data_t *feeders)
 	}
 	else
 	{
-		pwm_output(-1,0);
+		pwm_output(-1, 0);
 		CANone_cmd(0,0,0,0, LAUNCHER_ID);
 	}
 }

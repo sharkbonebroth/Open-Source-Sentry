@@ -33,7 +33,7 @@
  * can swap switch positions, but not name (without changing them in source)
  */
 
-
+//all_of will act as kill switch for all task
 
 enum left_switch
 {
