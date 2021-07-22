@@ -80,9 +80,6 @@ void gimbal_control_task(void *argument)
 
 void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 {
-
-	//todo: add in roll compensation
-
 	//changed from: if (remote_cmd.left_switch == a || xavier_data.last_time + XAVIER_TIMEOUT < HAL_GetTick())
 	if (remote_cmd.right_switch == all_on || remote_cmd.right_switch == gimbal_on) //gimbal is only activated if right switch is mid/bot pos
 	{
