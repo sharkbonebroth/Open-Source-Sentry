@@ -48,7 +48,6 @@ void usart_ISR(UART_HandleTypeDef *UartHandle)
 	}
 }
 
-
 /**
  *
  * FreeRTOS task for gimbal controls
