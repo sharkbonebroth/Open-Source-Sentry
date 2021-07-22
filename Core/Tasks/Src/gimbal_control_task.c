@@ -106,7 +106,6 @@ void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 			pitch = pitch_motor->min_ang;
 		}
 
-
 		if (yaw > yaw_motor->max_ang)
 		{
 			yaw = yaw_motor->max_ang;
