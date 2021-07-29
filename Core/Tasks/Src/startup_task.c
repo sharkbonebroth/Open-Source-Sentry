@@ -89,6 +89,7 @@ void startup_task()
 	//motor online check, code does not continue if any fails
 	if (MOTOR_ONLINE_CHECK == 1)
 	{
+		/*
 		while (canone_data.CHASSIS.id == 0)
 		{
 			err_buzzer(1,1);
@@ -100,16 +101,19 @@ void startup_task()
 				err_buzzer(1,i + 2);
 			}
 		}
+		*/
 
 		//gimbal motors check
 		while (canone_data.pitch.id == 0)
 		{
 			err_buzzer(1,8);
 		}
+		/*
 		while (canone_data.yaw.id == 0)
 		{
 			err_buzzer(1,9);
 		}
+		*/
 	}
 
 	pitch = 0;

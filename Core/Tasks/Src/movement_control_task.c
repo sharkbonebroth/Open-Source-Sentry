@@ -1,7 +1,7 @@
 /*
  * movement_control_task.c
  *
- *  Created on: Jan 19, 2021
+ *  Created on: Jul 28, 2021
  *      Author: Hans Kurnia
  */
 
@@ -24,14 +24,22 @@ extern osEventFlagsId_t chassis_data_flag;
 static uint8_t unjamming = 0;*/
 
 
-
 void movement_control_task(void *argument)
 {
 	while(1)
 	{
-		osEventFlagsWait(chassis_data_flag, 0x10, osFlagsWaitAll, 100);
-		chassis_motion_control(canone_data.CHASSIS);
-		osEventFlagsClear(chassis_data_flag, 0x10);
+		if(remote_cmd.left_switch == teleopetate)
+		{
+			osEventFlagsWait(chassis_data_flag, 0x10, osFlagsWaitAll, 100);
+			chassis_motion_control(canone_data.CHASSIS);
+			osEventFlagsClear(chassis_data_flag, 0x10);
+		}
+		else if (remote_cmd.right_switch == random_movement) //All on and aimbot on standby
+		{
+			// TODO RANDOM MOVEMENT
+			osEventFlagsWait(chassis_data_flag, 0x10, osFlagsWaitAll, 100);
+			osEventFlagsClear(chassis_data_flag, 0x10);
+		}
 		//delays task for other tasks to run
 		vTaskDelay(CHASSIS_DELAY);
 	}
@@ -41,6 +49,8 @@ void movement_control_task(void *argument)
 //Movement restricted to along x axis (hence, only read in remote_cmd.left_x)
 void chassis_motion_control(motor_data_t *motor)
 {
+	// TODO
+	/*
 	//Holds wheel speed output, fl = front left, etc...
 	int16_t out_wheel = 0;
 	int8_t direction[2] = {-1,1};
@@ -70,7 +80,7 @@ void chassis_motion_control(motor_data_t *motor)
 	else
 	{
 		CANone_cmd(0,0,0,0,CHASSIS_ID);
-	}
+	*/
 
 }
 
@@ -164,47 +174,4 @@ void chassis_motion_control(motor_data_t *motor)
 	}
 	CANone_cmd(motor[0].pid.output, motor[1].pid.output, motor[2].pid.output, motor[3].pid.output, CHASSIS_ID);
 }
-
-
-
-void CAN_launcher_control(motor_data_t *left_friction_motor, motor_data_t *right_friction_motor, motor_data_t *feeder)
-{
-	if (remote_cmd.left_switch == launcher_on)
-	{
-		int16_t feeder_output;
-		//TODO: add in speed checks and shtuffasdwqwe
-		speed_pid(FRICTION_WHEEL_SPD * FRICTION_INVERT,left_friction_motor->rpm, &left_friction_motor->pid);
-		speed_pid(-FRICTION_WHEEL_SPD * FRICTION_INVERT,right_friction_motor->rpm, &right_friction_motor->pid);
-
-		if (fabs(feeder->torque) > FEEDER_JAM_TORQUE)
-		{
-			unjamming = 1;
-			start_time = HAL_GetTick();
-		}
-		if (unjamming == 1)
-		{
-			if (start_time + FEEDER_UNJAM_TIME < HAL_GetTick())
-			{
-				unjamming = 0;
-				feeder_output = FEEDER_SPEED;
-			}
-			else
-			{
-				feeder_output = FEEDER_UNJAM_SPD;
-			}
-		}
-		else
-		{
-			feeder_output = FEEDER_SPEED;
-		}
-		speed_pid(feeder_output * 36,feeder->rpm, &feeder->pid);
-		CANone_cmd(left_friction_motor->pid.output, right_friction_motor->pid.output, feeder->pid.output, 0, LAUNCHER_ID);
-	}
-	else
-	{
-		htim4.Instance->CCR1 = 0;
-		CANone_cmd(0,0,0,0, LAUNCHER_ID);
-	}
-}
-
 */

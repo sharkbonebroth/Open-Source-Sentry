@@ -10,16 +10,11 @@
 
 /*
  * MOTOR IDS				PHYSICAL ID		ARRAY NO.
- * 0x201 -> FRONT RIGHT 	ID1				chassis_motor[0]
- * 0x202 -> FRONT LEFT		ID2				chassis_motor[1]
- * 0x203 -> BACK LEFT		ID3				chassis_motor[2]
- * 0x204 -> BACK RIGHT		ID4				chassis_motor[3]
- * 0x205 -> LEFT FRICITON	ID5				friction[0]
- * 0x206 -> RIGHT FRICTION	ID6				friction[1]
- * 0x207 -> M2006 FEEDER	ID7				feeder
- * 0x208 -> EMPTY
- * 0X209 -> PITCH			ID5				PITCH_MOTOR
- * 0X20A -> YAW				ID6				YAW_MOTOR
+ * 0x201 -> ID_CHASSIS	 	ID1				0
+ * 0x205 -> ID_FEEDER_R		ID2				1
+ * 0x206 -> ID_FEEDER_L		ID3				2
+ * 0x209 -> ID_PITCH		ID5				3
+ * 0x20A -> ID_YAW			ID6				4
  */
 
 /* !!!!!---------- Common configurations ----------!!!!!
@@ -38,15 +33,15 @@
 enum left_switch
 {
 	aimbot_enable = 1,
-	launcher_off = 2,
-	launcher_on = 3
+	teleopetate = 2,
+	kill = 3
 };
 
 enum right_switch
 {
-	all_off = 1,
-	all_on = 2,
-	gimbal_on = 3
+	fire = 1,
+	standby = 2,
+	random_movement = 3
 };
 
 
@@ -124,6 +119,8 @@ enum right_switch
 #define PITCH_MAX_RPM		120				//Max pitch RPM
 #define PITCH_CENTER		4096
 #define PITCH_MAX_CURRENT	20000
+#define PITCH_SWEEP_SPEED	0.01
+
 #define PITCH_MAX_ANGLE		1.6
 #define PITCH_MIN_ANGLE		-1.6
 
@@ -134,6 +131,7 @@ enum right_switch
 #define YAW_MAX_RPM			120				//Max yaw RPM
 #define YAW_CENTER 			5387
 #define YAW_MAX_CURRENT		20000
+#define YAW_SWEEP_SPEED		0.01
 
 #define GM6020_MAX_DEFLECTION 	4096		//max value per side that motor sends back, 8192 / 2
 #define GIMBAL_CAN 				hcan2

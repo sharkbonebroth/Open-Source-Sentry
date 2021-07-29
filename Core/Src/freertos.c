@@ -30,6 +30,7 @@
 #include "board_lib.h"
 #include "startup_task.h"
 #include "gimbal_control_task.h"
+#include "gun_control_task.h"
 #include "movement_control_task.h"
 #include "gun_control_task.h"
 #include "robot_config.h"

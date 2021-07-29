@@ -45,71 +45,66 @@ void gun_control_task(void *argument)
 
 	while(1)
 	{
-			//refresh dbus data
-			if (HAL_GetTick() - remote_cmd.last_time > REMOTE_TIMEOUT )
-			{
-				dbus_reset();
-			}
+		//refresh dbus data
+		if (HAL_GetTick() - remote_cmd.last_time > REMOTE_TIMEOUT )
+		{
+			dbus_reset();
+		}
+		//if firing and kill switch is not activated
+		if(remote_cmd.right_switch == fire && remote_cmd.left_switch != kill)
+		{
 			osEventFlagsWait(gun_data_flag, 0x10, osFlagsWaitAll, 100);
 			launcher_control(canone_data.FEEDER);
 			osEventFlagsClear(gun_data_flag, 0x10);
-			//delays task for other tasks to run, CHECK THE VALUE
-			vTaskDelay(CHASSIS_DELAY);
+		}
+		//otherwise kill the launcher
+		else
+		{
+			pwm_output(-1,0);
+			CANone_cmd(0,0,0,0, LAUNCHER_ID);
+		}
+		//delays task for other tasks to run, CHECK THE VALUE
+		vTaskDelay(CHASSIS_DELAY);
 	}
 	osThreadTerminate(NULL);
 }
 
 void launcher_control(motor_data_t *feeders)
 {
-	//Priority of switches, kill switch -> aimbot mode -> manual mode
-	if (remote_cmd.right_switch == all_off )
-	{
-		pwm_output(-1, 0);
-		CANone_cmd(0,0,0,0, LAUNCHER_ID);
-	}
-	//TODO: Add in aimbot mode before this condition
-	//TODO: CHECK UNJAMMING FEATURE
-	else if(remote_cmd.left_switch == launcher_on)
-	{
-		int16_t feeder_output[2];
-		for (int i = 0; i < 2; i++)
-		{
-			//Remember to change one of the motor direction according to data sheet since PWM cannot change direction.
-			pwm_output(i,cycle_to_pulse(50)); // 0-100 (max speed), 50: 50% (?) of maximum speed = 1300 microseconds pulsewidth
-			if (fabs(feeders[i].torque) > FEEDER_JAM_TORQUE)
-			{
-				unjamming[i] = 1;
-				start_time[i] = HAL_GetTick();
-			}
+	int16_t feeder_output[2];
 
-			//unjamming needed, check what feeder output to give
-			if (unjamming[i] == 1)
+	for (int i = 0; i < 2; i++)
+	{
+		//Remember to change one of the motor direction according to data sheet since PWM cannot change direction.
+		pwm_output(i,cycle_to_pulse(50)); // 0-100 (max speed), 50: 50% (?) of maximum speed = 1300 microseconds pulsewidth
+		if (fabs(feeders[i].torque) > FEEDER_JAM_TORQUE)
+		{
+			unjamming[i] = 1;
+			start_time[i] = HAL_GetTick();
+		}
+
+		//unjamming needed, check what feeder output to give
+		if (unjamming[i] == 1)
+		{
+			// feeder is unjamming itself successfully
+			if (start_time[i] + FEEDER_UNJAM_TIME < HAL_GetTick())
 			{
-				// feeder is unjamming itself successfully
-				if (start_time[i] + FEEDER_UNJAM_TIME < HAL_GetTick())
-				{
-					unjamming[i] = 0;
-					feeder_output[i] = FEEDER_SPEED;
-				}
-				// feeder is unable to unjam, hence, send unjam speed
-				else
-				{
-					feeder_output[i] = FEEDER_UNJAM_SPD;
-				}
-			}
-			else
-			{
+				unjamming[i] = 0;
 				feeder_output[i] = FEEDER_SPEED;
 			}
-			speed_pid(feeder_output[i] * 36,feeders[i].rpm, &feeders[i].pid);
+			// feeder is unable to unjam, hence, send unjam speed
+			else
+			{
+				feeder_output[i] = FEEDER_UNJAM_SPD;
+			}
 		}
-		CANone_cmd(feeders[0].pid.output, feeders[1].pid.output,0,0,LAUNCHER_ID);  //feeder M2006 id 5-6, identifier = 0x1ff
+		else
+		{
+			feeder_output[i] = FEEDER_SPEED;
+		}
+		speed_pid(feeder_output[i] * 36,feeders[i].rpm, &feeders[i].pid);
 	}
-	else
-	{
-		pwm_output(-1, 0);
-		CANone_cmd(0,0,0,0, LAUNCHER_ID);
-	}
+	CANone_cmd(feeders[0].pid.output, feeders[1].pid.output,0,0,LAUNCHER_ID);  //feeder M2006 id 5-6, identifier = 0x1ff
 }
 
 

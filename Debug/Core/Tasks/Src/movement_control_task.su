@@ -1,2 +1,2 @@
-movement_control_task.c:28:6:movement_control_task	112	static
-movement_control_task.c:42:6:chassis_motion_control	48	static
+movement_control_task.c:27:6:movement_control_task	112	static
+movement_control_task.c:50:6:chassis_motion_control	16	static
