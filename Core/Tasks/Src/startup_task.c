@@ -103,12 +103,13 @@ void startup_task()
 		}
 		*/
 
+		/*
 		//gimbal motors check
 		while (canone_data.pitch.id == 0)
 		{
 			err_buzzer(1,8);
 		}
-		/*
+
 		while (canone_data.yaw.id == 0)
 		{
 			err_buzzer(1,9);

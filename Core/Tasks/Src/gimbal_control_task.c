@@ -119,54 +119,51 @@ void gimbalsweep(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 {
 
-	//todo: add in roll compensation
-	if (remote_cmd.left_switch != kill)
+//todo: add in roll compensation
+	if (remote_cmd.left_switch == aimbot_enable && remote_cmd.right_switch == random_movement)
 	{
-		if (remote_cmd.left_switch == aimbot_enable && remote_cmd.right_switch == random_movement)
-		{
-			//sweeps the four corners of its field of vision
-			gimbalsweep(pitch_motor, yaw_motor);
-		}
-		else if (remote_cmd.left_switch == aimbot_enable || aimbot_mode == 1)
-		{
-			aimbot_mode = 1;
-			pitch += (float)xavier_data.pitch/660 * PITCH_SPEED * PITCH_INVERT;
-			yaw += (float)xavier_data.yaw/660 * YAW_SPEED * YAW_INVERT;
-		}
-		else if (remote_cmd.left_switch == teleopetate || xavier_data.last_time + XAVIER_TIMEOUT < HAL_GetTick())
-		{
-			pitch += (float)remote_cmd.right_y/660 * PITCH_SPEED * PITCH_INVERT;
-			yaw += (float)remote_cmd.right_x/660 * YAW_SPEED * YAW_INVERT;
-			aimbot_mode = 0;
-		}
-
-		if (pitch > pitch_motor->max_ang)
-		{
-			pitch = pitch_motor->max_ang;
-		}
-		if (pitch < pitch_motor->min_ang)
-		{
-			pitch = pitch_motor->min_ang;
-		}
-
-
-		if (yaw > yaw_motor->max_ang)
-		{
-			yaw = yaw_motor->max_ang;
-		}
-		if (yaw < yaw_motor->min_ang)
-		{
-			yaw = yaw_motor->min_ang;
-		}
-
-		angle_pid(pitch, pitch_motor->adj_ang, pitch_motor);
-		angle_pid(yaw, yaw_motor->adj_ang, yaw_motor);
-		CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
+		//sweeps the four corners of its field of vision
+		gimbalsweep(pitch_motor, yaw_motor);
 	}
-	else
+	else if (remote_cmd.left_switch == aimbot_enable)
 	{
-		CANtwo_cmd(0, 0, 0, 0, GIMBAL_ID);
+		aimbot_mode = 1;
+		pitch += (float)xavier_data.pitch/660 * PITCH_SPEED * PITCH_INVERT;
+		yaw += (float)xavier_data.yaw/660 * YAW_SPEED * YAW_INVERT;
 	}
+	else if (remote_cmd.left_switch == teleopetate /*|| xavier_data.last_time + XAVIER_TIMEOUT < HAL_GetTick()*/)
+	{
+		if (HAL_GetTick() - remote_cmd.last_time > REMOTE_TIMEOUT )
+		{
+			dbus_reset();
+		}
+		pitch += (float)remote_cmd.right_y/660 * PITCH_SPEED * PITCH_INVERT;
+		yaw += (float)remote_cmd.right_x/660 * YAW_SPEED * YAW_INVERT;
+		aimbot_mode = 0;
+	}
+
+	if (pitch > pitch_motor->max_ang)
+	{
+		pitch = pitch_motor->max_ang;
+	}
+	if (pitch < pitch_motor->min_ang)
+	{
+		pitch = pitch_motor->min_ang;
+	}
+
+
+	if (yaw > yaw_motor->max_ang)
+	{
+		yaw = yaw_motor->max_ang;
+	}
+	if (yaw < yaw_motor->min_ang)
+	{
+		yaw = yaw_motor->min_ang;
+	}
+
+	angle_pid(pitch, pitch_motor->adj_ang, pitch_motor);
+	angle_pid(yaw, yaw_motor->adj_ang, yaw_motor);
+	CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
 }
 
 

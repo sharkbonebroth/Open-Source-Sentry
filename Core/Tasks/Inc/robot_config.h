@@ -57,14 +57,14 @@ enum right_switch
 
 
 //Launcher settings
-#define FEEDER_KP 			0.10			// |
+#define FEEDER_KP 			1			// |
 #define FEEDER_KI  			0				// | - FEEDER PID VALUES
 #define FEEDER_KD  			6				// |
-#define FEEDER_SPEED  		10				//	Feeder speed. Multiply by number of slots in the feeder to get how many projectiles per minute
-#define FEEDER_JAM_TORQUE  	7000			//	Torque before feeder deemed to be jammed
-#define FEEDER_MAX_CURRENT	8000			//  Max value to be sent to motors. M2006 max value can be 10000
+#define FEEDER_SPEED  		100				//	Feeder speed. Multiply by number of slots in the feeder to get how many projectiles per minute
+#define FEEDER_JAM_TORQUE  	16400			//	Torque before feeder deemed to be jammed
+#define FEEDER_MAX_CURRENT	10000			//  Max value to be sent to motors. M2006 max value can be 10000
 #define FEEDER_UNJAM_SPD  	-5				//	Reverse unjam speed
-#define FEEDER_UNJAM_TIME	500
+#define FEEDER_UNJAM_TIME	150
 
 #define FRICTION_KP  		0.1				// |
 #define FRICTION_KD  		10				// | - FRICTION WHEELS PID VALUES
@@ -117,7 +117,7 @@ enum right_switch
 #define PITCH_KI  			0				// |
 #define PITCH_SPEED 	 	0.01			//Speed of gimbal pitch control turning
 #define PITCH_MAX_RPM		120				//Max pitch RPM
-#define PITCH_CENTER		4096
+#define PITCH_CENTER		2500
 #define PITCH_MAX_CURRENT	20000
 #define PITCH_SWEEP_SPEED	0.01
 
@@ -170,3 +170,6 @@ enum can_ids
 #define XAVIER_PITCH_MULT 0.1
 #endif /* TASKS_INC_ROBOT_CONFIG_H_ */
 
+#define WHEEL_DIAMETER 		0.06
+#define TRACK_LENGTH		3
+#define START_POSITION		0

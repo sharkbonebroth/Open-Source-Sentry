@@ -60,7 +60,7 @@ void gun_control_task(void *argument)
 		//otherwise kill the launcher
 		else
 		{
-			pwm_output(-1,0);
+			pwm_output(-1,400);
 			CANone_cmd(0,0,0,0, LAUNCHER_ID);
 		}
 		//delays task for other tasks to run, CHECK THE VALUE
@@ -76,7 +76,7 @@ void launcher_control(motor_data_t *feeders)
 	for (int i = 0; i < 2; i++)
 	{
 		//Remember to change one of the motor direction according to data sheet since PWM cannot change direction.
-		pwm_output(i,cycle_to_pulse(50)); // 0-100 (max speed), 50: 50% (?) of maximum speed = 1300 microseconds pulsewidth
+		pwm_output(i,1800); // 0-100 (max speed), 50: 50% (?) of maximum speed = 1300 microseconds pulsewidth
 		if (fabs(feeders[i].torque) > FEEDER_JAM_TORQUE)
 		{
 			unjamming[i] = 1;
@@ -101,6 +101,10 @@ void launcher_control(motor_data_t *feeders)
 		else
 		{
 			feeder_output[i] = FEEDER_SPEED;
+		}
+		if (i== 0)
+		{
+			feeder_output[i] *= -1;
 		}
 		speed_pid(feeder_output[i] * 36,feeders[i].rpm, &feeders[i].pid);
 	}

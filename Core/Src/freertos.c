@@ -159,8 +159,8 @@ void MX_FREERTOS_Init(void) {
   //todo: adjust priorities
   //Threads creation
   	gimbal_control_task_handle   = osThreadNew(gimbal_control_task, NULL, &high2_priority_task_attributes);
-  	movement_control_task_handle = osThreadNew(movement_control_task, NULL, &high_priority_task_attributes);//run now
-  	gun_control_task_handle = osThreadNew(gun_control_task, NULL, &high_priority_task_attributes);
+  	movement_control_task_handle = osThreadNew(movement_control_task, NULL, &low2_priority_task_attributes);//run now
+  	gun_control_task_handle = osThreadNew(gun_control_task, NULL, &low_priority_task_attributes);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
