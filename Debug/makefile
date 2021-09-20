@@ -67,8 +67,8 @@ all: main-build
 main-build: OS_sentry.elf secondary-outputs
 
 # Tool invocations
-OS_sentry.elf: $(OBJS) $(USER_OBJS) C:\Users\Low\ Zhi\ Jian\Desktop\Study\ stuffs\Robomasters\ Y1Summer\Open-Source-Sentry\STM32F427IIHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "OS_sentry.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Low Zhi Jian\Desktop\Study stuffs\Robomasters Y1Summer\Open-Source-Sentry\STM32F427IIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="OS_sentry.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+OS_sentry.elf: $(OBJS) $(USER_OBJS) C:\Users\Zheng\ Hao\ Chin\OneDrive\Desktop\Uni\Robomasters\OS_Sentry\STM32F427IIHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "OS_sentry.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Zheng Hao Chin\OneDrive\Desktop\Uni\Robomasters\OS_Sentry\STM32F427IIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="OS_sentry.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

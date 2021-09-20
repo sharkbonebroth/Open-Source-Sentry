@@ -65,7 +65,9 @@ void gun_control_task(void *argument)
 		else
 		{
 			pwm_output(-1,400);
-			CANone_cmd(0,0,0,0, LAUNCHER_ID);
+			speed_pid(0, canone_data.FEEDER[0].rpm, &canone_data.FEEDER[0].pid);
+			speed_pid(0, canone_data.FEEDER[1].rpm, &canone_data.FEEDER[1].pid);
+			CANone_cmd(canone_data.FEEDER[0].pid.output,canone_data.FEEDER[1].pid.output,0,0, LAUNCHER_ID);
 			firing[0] = 0;
 			firing[1] = 0;
 		}
@@ -88,7 +90,7 @@ void launcher_control(motor_data_t *feeders)
 			firing[i] = 1;
 			start_time[i] = HAL_GetTick();
 		}
-		if (start_time[i] + 500 < HAL_GetTick())
+		if (start_time[i] + 1000 < HAL_GetTick()) //If more than 1 s has passed since the fire command has been given,and flywheel has charged for 1s, feed
 		{
 			if (fabs(feeders[i].torque) > FEEDER_JAM_TORQUE)
 			{
@@ -99,13 +101,13 @@ void launcher_control(motor_data_t *feeders)
 			//unjamming needed, check what feeder output to give
 			if (unjamming[i] == 1)
 			{
-				// feeder is unjamming itself successfully
-				if (start_time[i] + FEEDER_UNJAM_TIME < HAL_GetTick())
+				// unjam time has elasped
+				if (jam_time[i] + FEEDER_UNJAM_TIME < HAL_GetTick())
 				{
 					unjamming[i] = 0;
 					feeder_output[i] = FEEDER_SPEED;
 				}
-				// feeder is unable to unjam, hence, send unjam speed
+				// feeder is still unjamming, hence, send unjam speed
 				else
 				{
 					feeder_output[i] = FEEDER_UNJAM_SPD;
@@ -115,15 +117,15 @@ void launcher_control(motor_data_t *feeders)
 			{
 				feeder_output[i] = FEEDER_SPEED;
 			}
-			if (i== 0)
+			if (i == 0)
 			{
 				feeder_output[i] *= -1;
 			}
 			speed_pid(feeder_output[i] * 36,feeders[i].rpm, &feeders[i].pid);
 		}
-		else
+		else //If less than 1 s has passed since the fire command has been given,and flywheel has charged for less than 1s, do not feed
 		{
-			feeders[i].pid.output = 0;
+			speed_pid(0,feeders[i].rpm, &feeders[i].pid);
 		}
 	}
 	CANone_cmd(feeders[0].pid.output, feeders[1].pid.output,0,0,LAUNCHER_ID);  //feeder M2006 id 5-6, identifier = 0x1ff

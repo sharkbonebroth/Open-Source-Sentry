@@ -118,8 +118,6 @@ void gimbalsweep(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 
 void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 {
-
-//todo: add in roll compensation
 	if (remote_cmd.left_switch == aimbot_enable && remote_cmd.right_switch == random_movement)
 	{
 		//sweeps the four corners of its field of vision
@@ -166,5 +164,10 @@ void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 	CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
 }
 
-
+void home_gimbal(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
+{
+	angle_pid(0, pitch_motor->adj_ang, pitch_motor);
+	angle_pid(0, yaw_motor->adj_ang, yaw_motor);
+	CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
+}
 

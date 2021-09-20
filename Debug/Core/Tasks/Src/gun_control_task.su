@@ -1,4 +1,4 @@
 gun_control_task.c:30:6:gun_control_task	24	static
-gun_control_task.c:78:6:launcher_control	64	static
-gun_control_task.c:134:6:pwm_output	16	static
-gun_control_task.c:156:10:cycle_to_pulse	16	static
+gun_control_task.c:80:6:launcher_control	64	static
+gun_control_task.c:136:6:pwm_output	16	static
+gun_control_task.c:158:10:cycle_to_pulse	16	static

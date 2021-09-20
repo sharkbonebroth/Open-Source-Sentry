@@ -29,6 +29,7 @@
 #include "actuator_feedback.h"
 #include "startup_task.h"
 #include "gimbal_control_task.h"
+#include "movement_control_task.h"
 extern uint8_t imu_triggered;
 extern remote_cmd_t remote_cmd;
 extern can_data_t canone_data;
@@ -89,7 +90,6 @@ void startup_task()
 	//motor online check, code does not continue if any fails
 	if (MOTOR_ONLINE_CHECK == 1)
 	{
-		/*
 		while (canone_data.CHASSIS.id == 0)
 		{
 			err_buzzer(1,1);
@@ -101,9 +101,6 @@ void startup_task()
 				err_buzzer(1,i + 2);
 			}
 		}
-		*/
-
-		/*
 		//gimbal motors check
 		while (canone_data.pitch.id == 0)
 		{
@@ -114,14 +111,12 @@ void startup_task()
 		{
 			err_buzzer(1,9);
 		}
-		*/
 	}
-
 	pitch = 0;
 	yaw	  = 0;
 	ok_buzzer(1,1);
 	led_toggle();
-
+	homing_sequence(&canone_data.CHASSIS); //Performs homing sequence
 }
 
 

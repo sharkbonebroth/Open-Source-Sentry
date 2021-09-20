@@ -1,5 +1,5 @@
 Core/BSP/Src/bsp_oled.o: ../Core/BSP/Src/bsp_oled.c \
- C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_oled.h \
+ C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_oled.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -31,9 +31,9 @@ Core/BSP/Src/bsp_oled.o: ../Core/BSP/Src/bsp_oled.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/spi.h ../Core/Inc/main.h \
- C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/oledfont.h
+ C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/oledfont.h
 
-C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_oled.h:
+C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_oled.h:
 
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 
@@ -99,4 +99,4 @@ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-
 
 ../Core/Inc/main.h:
 
-C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/oledfont.h:
+C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/oledfont.h:

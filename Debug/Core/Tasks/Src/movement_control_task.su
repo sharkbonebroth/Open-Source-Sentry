@@ -1,3 +1,7 @@
-movement_control_task.c:30:6:movement_control_task	24	static
-movement_control_task.c:75:6:chassis_motion_control	48	static
-movement_control_task.c:116:6:chassis_sweep	16	static
+movement_control_task.c:34:6:movement_control_task	24	static
+movement_control_task.c:79:7:update_current_position	32	static
+movement_control_task.c:108:7:rpm_to_speed	24	static
+movement_control_task.c:115:6:chassis_motion_control	48	static
+movement_control_task.c:132:6:chassis_sweep	40	static
+movement_control_task.c:176:6:generate_goal_position	16	static
+movement_control_task.c:181:6:homing_sequence	32	static
