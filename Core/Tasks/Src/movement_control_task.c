@@ -36,16 +36,14 @@ void movement_control_task(void *argument)
 		{
 			if(remote_cmd.left_switch == teleopetate)
 			{
-				osEventFlagsWait(chassis_data_flag, 0x10, osFlagsWaitAll, 100);
-				chassis_motion_control(canone_data.CHASSIS);
-				osEventFlagsClear(chassis_data_flag, 0x10);
+				chassis_motion_control(&canone_data.CHASSIS);
 			}
 			else if (remote_cmd.right_switch == random_movement)
 			{
 				// TODO RANDOM MOVEMENT
-				osEventFlagsWait(chassis_data_flag, 0x10, osFlagsWaitAll, 100);
+				//osEventFlagsWait(chassis_data_flag, 0x10, osFlagsWaitAll, 100);
 				//chassis_sweep(canone_data.CHASSIS);
-				osEventFlagsClear(chassis_data_flag, 0x10);
+				//osEventFlagsClear(chassis_data_flag, 0x10);
 			}
 			else
 			{
@@ -77,8 +75,8 @@ void update_current_position()
 void chassis_motion_control(motor_data_t *motor)
 {
 	int16_t out_wheel = 0;
-	out_wheel = MAX_SPEED * (remote_cmd.left_x)/(MAX_RC_VALUE/2);
-	speed_pid(out_wheel,motor->rpm, &motor->pid);
+	out_wheel = (MAX_SPEED * remote_cmd.left_x * 2)/(MAX_RC_VALUE);
+	speed_pid((double)out_wheel,(double)motor->rpm, &motor->pid);
 	CANone_cmd(motor->pid.output, 0, 0, 0, CHASSIS_ID);
 	// TODO
 	/*

@@ -1,3 +1,3 @@
-movement_control_task.c:30:6:movement_control_task	112	static
-movement_control_task.c:77:6:chassis_motion_control	48	static
-movement_control_task.c:118:6:chassis_sweep	16	static
+movement_control_task.c:30:6:movement_control_task	24	static
+movement_control_task.c:75:6:chassis_motion_control	48	static
+movement_control_task.c:116:6:chassis_sweep	16	static

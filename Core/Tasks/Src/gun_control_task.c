@@ -15,8 +15,10 @@ extern can_data_t canone_data;
 extern remote_cmd_t remote_cmd;
 extern osEventFlagsId_t gun_data_flag;
 
+static uint32_t jam_time[2] = {0};
 static uint32_t start_time[2] = {0};
 static uint8_t unjamming[2] = {0};
+static uint8_t firing[2] = {0};
 uint16_t rotation_freq =  1000000/400 ;   //recommended 30-500Hz for snail 2305, current freq: 400Hz
 //note: Prescaler = 84, hence, each bit takes 1 microsecond for the counter
 //TODO: Declare as MACRO instead.
@@ -49,6 +51,8 @@ void gun_control_task(void *argument)
 		if (HAL_GetTick() - remote_cmd.last_time > REMOTE_TIMEOUT )
 		{
 			dbus_reset();
+			firing[0] = 0;
+			firing[1] = 0;
 		}
 		//if firing and kill switch is not activated
 		if(remote_cmd.right_switch == fire && remote_cmd.left_switch != kill)
@@ -62,6 +66,8 @@ void gun_control_task(void *argument)
 		{
 			pwm_output(-1,400);
 			CANone_cmd(0,0,0,0, LAUNCHER_ID);
+			firing[0] = 0;
+			firing[1] = 0;
 		}
 		//delays task for other tasks to run, CHECK THE VALUE
 		vTaskDelay(CHASSIS_DELAY);
@@ -76,37 +82,49 @@ void launcher_control(motor_data_t *feeders)
 	for (int i = 0; i < 2; i++)
 	{
 		//Remember to change one of the motor direction according to data sheet since PWM cannot change direction.
-		pwm_output(i,1800); // 0-100 (max speed), 50: 50% (?) of maximum speed = 1300 microseconds pulsewidth
-		if (fabs(feeders[i].torque) > FEEDER_JAM_TORQUE)
+		pwm_output(i,1300); // 0-100 (max speed), 50: 50% (?) of maximum speed = 1300 microseconds pulsewidth
+		if (firing[i] == 0)
 		{
-			unjamming[i] = 1;
+			firing[i] = 1;
 			start_time[i] = HAL_GetTick();
 		}
-
-		//unjamming needed, check what feeder output to give
-		if (unjamming[i] == 1)
+		if (start_time[i] + 500 < HAL_GetTick())
 		{
-			// feeder is unjamming itself successfully
-			if (start_time[i] + FEEDER_UNJAM_TIME < HAL_GetTick())
+			if (fabs(feeders[i].torque) > FEEDER_JAM_TORQUE)
 			{
-				unjamming[i] = 0;
-				feeder_output[i] = FEEDER_SPEED;
+				unjamming[i] = 1;
+				jam_time[i] = HAL_GetTick();
 			}
-			// feeder is unable to unjam, hence, send unjam speed
+
+			//unjamming needed, check what feeder output to give
+			if (unjamming[i] == 1)
+			{
+				// feeder is unjamming itself successfully
+				if (start_time[i] + FEEDER_UNJAM_TIME < HAL_GetTick())
+				{
+					unjamming[i] = 0;
+					feeder_output[i] = FEEDER_SPEED;
+				}
+				// feeder is unable to unjam, hence, send unjam speed
+				else
+				{
+					feeder_output[i] = FEEDER_UNJAM_SPD;
+				}
+			}
 			else
 			{
-				feeder_output[i] = FEEDER_UNJAM_SPD;
+				feeder_output[i] = FEEDER_SPEED;
 			}
+			if (i== 0)
+			{
+				feeder_output[i] *= -1;
+			}
+			speed_pid(feeder_output[i] * 36,feeders[i].rpm, &feeders[i].pid);
 		}
 		else
 		{
-			feeder_output[i] = FEEDER_SPEED;
+			feeders[i].pid.output = 0;
 		}
-		if (i== 0)
-		{
-			feeder_output[i] *= -1;
-		}
-		speed_pid(feeder_output[i] * 36,feeders[i].rpm, &feeders[i].pid);
 	}
 	CANone_cmd(feeders[0].pid.output, feeders[1].pid.output,0,0,LAUNCHER_ID);  //feeder M2006 id 5-6, identifier = 0x1ff
 }

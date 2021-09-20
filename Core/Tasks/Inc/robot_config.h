@@ -60,7 +60,7 @@ enum right_switch
 #define FEEDER_KP 			1			// |
 #define FEEDER_KI  			0				// | - FEEDER PID VALUES
 #define FEEDER_KD  			6				// |
-#define FEEDER_SPEED  		100				//	Feeder speed. Multiply by number of slots in the feeder to get how many projectiles per minute
+#define FEEDER_SPEED  		30  				//	Feeder speed. Multiply by number of slots in the feeder to get how many projectiles per minute
 #define FEEDER_JAM_TORQUE  	16400			//	Torque before feeder deemed to be jammed
 #define FEEDER_MAX_CURRENT	10000			//  Max value to be sent to motors. M2006 max value can be 10000
 #define FEEDER_UNJAM_SPD  	-5				//	Reverse unjam speed
@@ -95,11 +95,11 @@ enum right_switch
 
 
 //Chassis settings
-#define CHASSIS_KP  		0.5				// |
+#define CHASSIS_KP  		0.1				// |
 #define CHASSIS_KI  		0				// | - CHASSIS WHEELS PID VALUES
-#define CHASSIS_KD  		50				// |
+#define CHASSIS_KD  		10				// |
 
-#define MAX_SPEED 			8000 			//Max speed of robot
+#define MAX_SPEED 			4000 			//Max speed of robot
 #define TURNING_SPEED		4000 			//Rotation speed of robot
 #define CHASSIS_CANOFFSET	(0x201)
 #define CHASSIS_DELAY 		2
@@ -109,29 +109,33 @@ enum right_switch
 #define CHASSIS_ID 			0x200
 
 //Gimbal settings
-#define YAW_INVERT  		-1				//1 to invert control -1 to disable
-#define PITCH_INVERT  		-1				//1 to invert control -1 to disable
+#define YAW_INVERT  		1				//1 to invert control -1 to disable
+#define PITCH_INVERT  		1				//1 to invert control -1 to disable
 
 #define PITCH_KP	  		0.1				// |
 #define PITCH_KD  			10				// | - GIMBAL PID VALUES (from 80)
 #define PITCH_KI  			0				// |
 #define PITCH_SPEED 	 	0.01			//Speed of gimbal pitch control turning
 #define PITCH_MAX_RPM		120				//Max pitch RPM
-#define PITCH_CENTER		2500
+#define PITCH_CENTER		6600
 #define PITCH_MAX_CURRENT	20000
 #define PITCH_SWEEP_SPEED	0.01
 
-#define PITCH_MAX_ANGLE		1.6
-#define PITCH_MIN_ANGLE		-1.6
+#define PITCH_MAX_ANGLE		0.35
+#define PITCH_MIN_ANGLE		-0.27
 
-#define YAW_KP				0.1
-#define YAW_KD				10
-#define YAW_KI				0
+#define YAW_KP				0.3
+#define YAW_KD				150
+#define YAW_KI				0.1
 #define YAW_SPEED 	 		0.01 			//Speed of gimbal yaw control turning
 #define YAW_MAX_RPM			120				//Max yaw RPM
-#define YAW_CENTER 			5387
-#define YAW_MAX_CURRENT		20000
+#define YAW_CENTER 			8095
+#define YAW_MAX_CURRENT		20000mm
 #define YAW_SWEEP_SPEED		0.01
+
+#define YAW_MAX_ANGLE		1.35
+#define YAW_MIN_ANGLE		-1.44
+
 
 #define GM6020_MAX_DEFLECTION 	4096		//max value per side that motor sends back, 8192 / 2
 #define GIMBAL_CAN 				hcan2

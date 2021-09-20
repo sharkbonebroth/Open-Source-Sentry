@@ -1,5 +1,5 @@
 Core/Tasks/Src/actuator_feedback.o: ../Core/Tasks/Src/actuator_feedback.c \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_lib.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/board_lib.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -42,27 +42,27 @@ Core/Tasks/Src/actuator_feedback.o: ../Core/Tasks/Src/actuator_feedback.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../Core/Inc/arm_math.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_settings.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/typedefs.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_dbus_input.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/board_settings.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/typedefs.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_dbus_input.h \
  ../Core/Inc/usart.h ../Core/Inc/main.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_usart.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_referee.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_can.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_usart.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_referee.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_can.h \
  ../Core/Inc/can.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_led.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_led.h \
  ../Core/Inc/gpio.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_oled.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_oled.h \
  ../Core/Inc/spi.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_imu.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/ist8310_reg.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/mpu6500_reg.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_buzzer.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_imu.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/ist8310_reg.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/mpu6500_reg.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_buzzer.h \
  ../Core/Inc/tim.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/robot_config.h \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/actuator_feedback.h
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/Tasks/Inc/robot_config.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/Tasks/Inc/actuator_feedback.h
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_lib.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/board_lib.h:
 
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 
@@ -148,42 +148,42 @@ C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/In
 
 ../Core/Inc/arm_math.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/board_settings.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/board_settings.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/typedefs.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/typedefs.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_dbus_input.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_dbus_input.h:
 
 ../Core/Inc/usart.h:
 
 ../Core/Inc/main.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_usart.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_usart.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_referee.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_referee.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_can.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_can.h:
 
 ../Core/Inc/can.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_led.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_led.h:
 
 ../Core/Inc/gpio.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_oled.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_oled.h:
 
 ../Core/Inc/spi.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_imu.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_imu.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/ist8310_reg.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/ist8310_reg.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/mpu6500_reg.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/mpu6500_reg.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_buzzer.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_buzzer.h:
 
 ../Core/Inc/tim.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/robot_config.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/Tasks/Inc/robot_config.h:
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/Tasks/Inc/actuator_feedback.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/Tasks/Inc/actuator_feedback.h:

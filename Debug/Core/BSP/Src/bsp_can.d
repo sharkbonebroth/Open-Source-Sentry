@@ -1,5 +1,5 @@
 Core/BSP/Src/bsp_can.o: ../Core/BSP/Src/bsp_can.c \
- C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_can.h \
+ C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_can.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -32,7 +32,7 @@ Core/BSP/Src/bsp_can.o: ../Core/BSP/Src/bsp_can.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/can.h ../Core/Inc/main.h
 
-C:/Users/Zheng\ Hao\ Chin/OneDrive/Desktop/Uni/Robomasters/OS_Sentry/Core/BSP/Inc/bsp_can.h:
+C:/Users/Low\ Zhi\ Jian/Desktop/Study\ stuffs/Robomasters\ Y1Summer/Open-Source-Sentry/Core/BSP/Inc/bsp_can.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
