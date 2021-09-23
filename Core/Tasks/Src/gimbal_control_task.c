@@ -12,7 +12,6 @@
 #include "motor_control.h"
 #include "gimbal_control_task.h"
 #include "stdbool.h"
-uint8_t aimbot_mode = 0;
 
 #define GEARBOX_RATIO 36
 
@@ -33,24 +32,22 @@ extern osEventFlagsId_t gimbal_data_flag;
 extern osEventFlagsId_t rc_data_flag;
 extern osThreadId_t movement_control_task_handle;
 
-void usart_ISR(UART_HandleTypeDef *UartHandle)
+void xavier_ISR(DMA_HandleTypeDef *hdma)
 {
-	xavier_data.magic_number = ((xavier_rx_buffer[1] << 8) | xavier_rx_buffer[0]);
-	xavier_data.yaw = ((xavier_rx_buffer[3] << 8) | xavier_rx_buffer[2]);
-	xavier_data.pitch = ((xavier_rx_buffer[5] << 8) | xavier_rx_buffer[4]);
-	xavier_data.end_check = (xavier_rx_buffer[7] << 8) | xavier_rx_buffer[6];
+	xavier_data.magic_number = ((xavier_rx_buffer[0] << 8) | xavier_rx_buffer[1]);
+	xavier_data.x_pos = ((xavier_rx_buffer[2] << 8) | xavier_rx_buffer[3]);
+	xavier_data.y_pos = (xavier_rx_buffer[4] << 8) | xavier_rx_buffer[5];
+	xavier_data.end_check = (xavier_rx_buffer[6] << 8) | xavier_rx_buffer[7];
 	if (xavier_data.magic_number != START_MAGIC_NUMBER || xavier_data.end_check != END_MAGIC_NUMBER)
 	{
-		xavier_data.pitch = 0;
-		xavier_data.yaw = 0;
+		xavier_data.y_pos = 0;
+		xavier_data.x_pos = 0;
 	}
 	else
 	{
-		//store previous data to account for bad data
 		xavier_data.last_time = HAL_GetTick();
 	}
 }
-
 /**
  *
  * FreeRTOS task for gimbal controls
@@ -79,55 +76,44 @@ void gimbal_control_task(void *argument)
  * still provides a fast enough response for open source robots
  */
 
-void gimbalsweep(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
+void yaw_sweep(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 {
-	aimbot_mode = 1;
-	if (sweeping_yaw == true){
-		if (sweep_right == true){
-			yaw += YAW_SWEEP_SPEED;
-			if (yaw > yaw_motor->max_ang){
-				sweep_right = false;
-				sweeping_yaw = false;
-			}
-		}
-		else {
-			yaw -= YAW_SWEEP_SPEED;
-			if (yaw < yaw_motor->min_ang){
-				sweep_right = true;
-				sweeping_yaw = false;
-			}
+	pitch = -0.1;
+	if (sweep_right == true)
+	{
+		yaw += YAW_SWEEP_SPEED;
+		if (yaw > yaw_motor->max_ang)
+		{
+			sweep_right = false;
 		}
 	}
-	else {
-		if (sweep_up == true){
-			pitch += PITCH_SWEEP_SPEED;
-			if (pitch > pitch_motor->max_ang){
-				sweep_up = false;
-				sweeping_yaw = true;
-			}
-		}
-		else {
-			pitch -= PITCH_SWEEP_SPEED;
-			if (pitch < pitch_motor->min_ang){
-				sweep_up = true;
-				sweeping_yaw = true;
-			}
+	else
+	{
+		yaw -= YAW_SWEEP_SPEED;
+		if (yaw < yaw_motor->min_ang)
+		{
+			sweep_right = true;
 		}
 	}
 }
 
+
+
+
 void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 {
-	if (remote_cmd.left_switch == aimbot_enable && remote_cmd.right_switch == random_movement)
+	if (remote_cmd.right_switch == random_movement)
 	{
-		//sweeps the four corners of its field of vision
-		gimbalsweep(pitch_motor, yaw_motor);
+		yaw_sweep(pitch_motor, yaw_motor);
 	}
-	else if (remote_cmd.left_switch == aimbot_enable)
+	else if (remote_cmd.left_switch == aimbot_enable && xavier_data.last_time + XAVIER_TIMEOUT < HAL_GetTick())
 	{
-		aimbot_mode = 1;
-		pitch += (float)xavier_data.pitch/660 * PITCH_SPEED * PITCH_INVERT;
-		yaw += (float)xavier_data.yaw/660 * YAW_SPEED * YAW_INVERT;
+		//If Xavier has not timed out, move gimbal towards target
+		//Normalize xavier data
+		float normalized_y = xavier_data.y_pos + XAVIER_PITCH_NORMALIZER;
+		float normalized_x = xavier_data.x_pos + XAVIER_YAW_NORMALIZER;
+		pitch += normalized_y * XAVIER_SWEEP_SPEED;
+		yaw += normalized_x + XAVIER_SWEEP_SPEED;
 	}
 	else if (remote_cmd.left_switch == teleopetate /*|| xavier_data.last_time + XAVIER_TIMEOUT < HAL_GetTick()*/)
 	{
@@ -137,7 +123,6 @@ void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 		}
 		pitch += (float)remote_cmd.right_y/660 * PITCH_SPEED * PITCH_INVERT;
 		yaw += (float)remote_cmd.right_x/660 * YAW_SPEED * YAW_INVERT;
-		aimbot_mode = 0;
 	}
 
 	if (pitch > pitch_motor->max_ang)
@@ -161,13 +146,6 @@ void gimbal_angle_control(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
 
 	angle_pid(pitch, pitch_motor->adj_ang, pitch_motor);
 	angle_pid(yaw, yaw_motor->adj_ang, yaw_motor);
-	CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
-}
-
-void home_gimbal(gimbal_data_t *pitch_motor, gimbal_data_t *yaw_motor)
-{
-	angle_pid(0, pitch_motor->adj_ang, pitch_motor);
-	angle_pid(0, yaw_motor->adj_ang, yaw_motor);
 	CANtwo_cmd(pitch_motor->pid.output, yaw_motor->pid.output, 0, 0, GIMBAL_ID);
 }
 

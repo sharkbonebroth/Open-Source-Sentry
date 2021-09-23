@@ -1,3 +1,3 @@
-startup_task.c:41:6:startup_task	16	static
-startup_task.c:123:6:err_buzzer	24	static
-startup_task.c:142:6:ok_buzzer	24	static
+startup_task.c:42:6:startup_task	16	static
+startup_task.c:125:6:err_buzzer	24	static
+startup_task.c:144:6:ok_buzzer	24	static

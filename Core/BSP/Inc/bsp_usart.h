@@ -23,17 +23,21 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_uart.h"
 #include "usart.h"
-
+#include "typedefs.h"
 #define XAVIER_DATA_SIZE 8
 
 
 typedef struct
 {
 	int16_t magic_number;
-	int16_t pitch;
-	int16_t yaw;
+	int16_t y_pos;
+	int16_t x_pos;
 	int16_t end_check;
 	uint32_t last_time;
+	pid_data_t yaw_pid;
+	pid_data_t pitch_pid;
+	int16_t x_offset;
+	int16_t y_offset;
 }xavier_packet_t;
 
 #define START_MAGIC_NUMBER	69

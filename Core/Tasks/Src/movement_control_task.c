@@ -28,6 +28,7 @@ float track_length = 0;
 float last_position_update_time = 0;
 float goal_position = 0;
 float last_speed_commanded = 0;
+float last_goal_reach_time = 0;
 bool moving_towards_goal = false;
 bool stopping = false;
 
@@ -57,12 +58,20 @@ void movement_control_task(void *argument)
 			{
 				chassis_sweep(&canone_data.CHASSIS);
 			}
-			else
+			else if (remote_cmd.left_switch == aimbot_enable)
 			{
-				// Stops chassis movement if aimbot decides to standby or fire launcher
-				last_speed_commanded = 0;
-				speed_pid(0, canone_data.CHASSIS.rpm, &canone_data.CHASSIS.pid);
-				CANone_cmd(canone_data.CHASSIS.pid.output, 0, 0, 0, CHASSIS_ID);
+				if ((xavier_data.last_time + XAVIER_TIMEOUT) < HAL_GetTick())
+				{
+					// If last xavier data is received more than XAVIER_TIMEOUT ago, perform random sweeping
+					chassis_sweep(&canone_data.CHASSIS);
+				}
+				else
+				{
+					// Stops chassis movement if aimbot finds a target
+					last_speed_commanded = 0;
+					speed_pid(0, canone_data.CHASSIS.rpm, &canone_data.CHASSIS.pid);
+					CANone_cmd(canone_data.CHASSIS.pid.output, 0, 0, 0, CHASSIS_ID);
+				}
 			}
 		}
 		else
@@ -146,8 +155,11 @@ void chassis_sweep(motor_data_t *motor)
 	}
 	else if (moving_towards_goal == false)
 	{
-		generate_goal_position();
-		moving_towards_goal = true;
+		if ((last_goal_reach_time + 1000) < HAL_GetTick())
+		{
+			generate_goal_position();
+			moving_towards_goal = true;
+		}
 	}
 	else
 	{
@@ -155,6 +167,7 @@ void chassis_sweep(motor_data_t *motor)
 		distance_from_current_to_goal = goal_position - current_position;
 		if (fabs(distance_from_current_to_goal) < 0.05)
 		{
+			last_goal_reach_time = HAL_GetTick();
 			moving_towards_goal = false;
 			stopping = true;
 		}
@@ -175,27 +188,32 @@ void chassis_sweep(motor_data_t *motor)
 
 void generate_goal_position() //generates goal positions with 0.15m of leeway from max/min goal positions to the limits
 {
-	goal_position = 0.15 + (rand() / RAND_MAX) * (track_length - 0.3);
+	float fake_random_number = (float)(HAL_GetTick() % 257) / 257;
+	goal_position = 0.15 + fake_random_number * (track_length - 0.3);
 }
 
 void homing_sequence(motor_data_t *motor) //Homing sequence to measure the length of the track and start the sentry from a home point
 {
-	home_gimbal(&canone_data.pitch, &canone_data.yaw); //Home gimbal before homing
+	//home_gimbal(&canone_data.pitch, &canone_data.yaw); //Home gimbal before homing.
 	current_position = 0;
 	track_length = 0;
 	// Move to one end of the track
-	while (motor->torque < HOMING_TORQUE)
+	while (fabs(motor->torque) < HOMING_TORQUE)
 	{
 		last_speed_commanded = -HOMING_SPEED;
 		speed_pid(-HOMING_SPEED, motor->rpm, &motor->pid);
 		CANone_cmd(motor->pid.output, 0, 0, 0, CHASSIS_ID);
+		HAL_Delay(5);
 	}
+	CANone_cmd(0,0,0,0,CHASSIS_ID);
+	HAL_Delay(5);
 	// Start computing the length of the track while moving to the other end of the track
-	while (motor->torque < HOMING_TORQUE)
+	while (fabs(motor->torque) < HOMING_TORQUE)
 	{
 		last_speed_commanded = HOMING_SPEED;
 		speed_pid(HOMING_SPEED, motor->rpm, &motor->pid);
 		CANone_cmd(motor->pid.output, 0, 0, 0, CHASSIS_ID);
 		track_length += update_current_position(true);
+		HAL_Delay(5);
 	}
 }

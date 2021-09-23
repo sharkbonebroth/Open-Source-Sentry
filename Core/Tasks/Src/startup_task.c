@@ -33,6 +33,7 @@
 extern uint8_t imu_triggered;
 extern remote_cmd_t remote_cmd;
 extern can_data_t canone_data;
+extern xavier_rx_buffer;
 
 extern float pitch;
 extern float yaw;
@@ -45,7 +46,8 @@ void startup_task()
 	can_start(&hcan1);
 	can_start(&hcan2);
 	buzzer_init();
-	dbus_remote_start(remote_raw_data);
+	dbus_remote_start(remote_raw_data); //Enables RC Control
+	xavier_usart_start(xavier_rx_buffer, OBC_DATA_SIZE); //Enables Xavier input
 	HAL_Delay(STARTUP_DELAY);
 	led_green_off();
 

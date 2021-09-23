@@ -1,5 +1,4 @@
-gimbal_control_task.c:36:6:usart_ISR	16	static
-gimbal_control_task.c:60:6:gimbal_control_task	16	static
-gimbal_control_task.c:82:6:gimbalsweep	16	static
-gimbal_control_task.c:119:6:gimbal_angle_control	32	static
-gimbal_control_task.c:167:6:home_gimbal	24	static
+gimbal_control_task.c:35:6:xavier_ISR	16	static
+gimbal_control_task.c:57:6:gimbal_control_task	16	static
+gimbal_control_task.c:79:6:yaw_sweep	16	static
+gimbal_control_task.c:103:6:gimbal_angle_control	40	static

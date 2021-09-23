@@ -17,9 +17,6 @@ HAL_StatusTypeDef usart_send_data(UART_HandleTypeDef *huart, uint8_t *tx_buffer,
 	return HAL_OK;
 }
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle) {
-	usart_ISR(UartHandle);
-}
 
 HAL_StatusTypeDef xavier_usart_start(uint8_t *pData, uint16_t Size)
 {

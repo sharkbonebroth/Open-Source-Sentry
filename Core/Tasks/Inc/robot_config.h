@@ -95,20 +95,20 @@ enum right_switch
 
 
 //Chassis settings
-#define CHASSIS_KP  		0.5				// |
+#define CHASSIS_KP  		0.1				// |
 #define CHASSIS_KI  		0				// | - CHASSIS WHEELS PID VALUES
-#define CHASSIS_KD  		50				// |
+#define CHASSIS_KD  		10				// |
 
-#define MAX_SPEED 			8000 			//Max speed of robot
-#define HOMING_SPEED		1000 			//Homing Speed of sentry
-#define SWEEPING_SPEED		2000
+#define MAX_SPEED 			500 			//Max speed of robot
+#define HOMING_SPEED		500 			//Homing Speed of sentry
+#define SWEEPING_SPEED		500
 #define CHASSIS_CANOFFSET	(0x201)
 #define CHASSIS_DELAY 		2
 #define CHASSIS_MAX_CURRENT 15384
-#define CHASSIS_MIN_CURRENT 1000
+#define CHASSIS_MIN_CURRENT 0
 #define CHASSIS_CAN 		hcan1
 #define CHASSIS_ID 			0x200
-#define HOMING_TORQUE  		10000			//	Torque before the sentry bot is determined to have hit the limits
+#define HOMING_TORQUE  		11000			//	Torque before the sentry bot is determined to have hit the limits
 #define WHEEL_DIAMETER		0.06
 
 //Gimbal settings
@@ -122,8 +122,7 @@ enum right_switch
 #define PITCH_MAX_RPM		120				//Max pitch RPM
 #define PITCH_CENTER		6600
 #define PITCH_MAX_CURRENT	20000
-#define PITCH_SWEEP_SPEED	0.01
-
+#define PITCH_SWEEP_SPEED	0.0005
 #define PITCH_MAX_ANGLE		0.35
 #define PITCH_MIN_ANGLE		-0.27
 
@@ -134,8 +133,7 @@ enum right_switch
 #define YAW_MAX_RPM			120				//Max yaw RPM
 #define YAW_CENTER 			8095
 #define YAW_MAX_CURRENT		20000
-#define YAW_SWEEP_SPEED		0.01
-
+#define YAW_SWEEP_SPEED		0.0005
 #define YAW_MAX_ANGLE		1.35
 #define YAW_MIN_ANGLE		-1.44
 
@@ -146,6 +144,10 @@ enum right_switch
 #define GIMBAL_MAX_INT			10
 #define GIMBAL_ID 				0x2FF
 
+#define XAVIER_SWEEP_SPEED		0.001
+#define XAVIER_PITCH_NORMALIZER	-500
+#define XAVIER_YAW_NORMALIZER	-500
+#define XAVIER_SHOOT_BOX_SIZE	100
 
 
 //CAN IDs
@@ -165,7 +167,7 @@ enum can_ids
 #define LOW_FREQ 			440
 #define HIGH_FREQ			880
 #define BUZZER_DELAY 		100
-#define MOTOR_ONLINE_CHECK 	1
+#define MOTOR_ONLINE_CHECK 	0
 
 #define OBC_DATA_SIZE		8
 #define HORIZONTAL_MULT 	1

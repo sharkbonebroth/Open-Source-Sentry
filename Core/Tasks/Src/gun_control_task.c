@@ -14,6 +14,7 @@
 extern can_data_t canone_data;
 extern remote_cmd_t remote_cmd;
 extern osEventFlagsId_t gun_data_flag;
+extern xavier_packet_t xavier_data;
 
 static uint32_t jam_time[2] = {0};
 static uint32_t start_time[2] = {0};
@@ -24,6 +25,7 @@ uint16_t rotation_freq =  1000000/400 ;   //recommended 30-500Hz for snail 2305,
 //TODO: Declare as MACRO instead.
 uint16_t min_pwm = 400;
 uint16_t max_pwm = 2200;
+float last_fed_time = 0;
 
 
 //TODO: Check rotation frequency, change to autonomous (currently dependent on RC)
@@ -57,14 +59,47 @@ void gun_control_task(void *argument)
 		//if firing and kill switch is not activated
 		if(remote_cmd.right_switch == fire && remote_cmd.left_switch != kill)
 		{
-			osEventFlagsWait(gun_data_flag, 0x10, osFlagsWaitAll, 100);
-			launcher_control(canone_data.FEEDER);
-			osEventFlagsClear(gun_data_flag, 0x10);
+			if (remote_cmd.left_switch == aimbot_enable)
+			{
+				//If aimbot is enabled, only fire if the target is close to the center. Will shoot if the target is within a box of XAVIER_SHOOT_BOX_SIZE in the center of the camera
+				// Normalize xavier data
+				float normalized_y = xavier_data.y_pos + XAVIER_PITCH_NORMALIZER;
+				float normalized_x = xavier_data.x_pos + XAVIER_YAW_NORMALIZER;
+				if ((fabs(normalized_y) < (XAVIER_SHOOT_BOX_SIZE/2)) && (fabs(normalized_x) < (XAVIER_SHOOT_BOX_SIZE/2)))
+				{
+					osEventFlagsWait(gun_data_flag, 0x10, osFlagsWaitAll, 100);
+					pewpew(canone_data.FEEDER);
+					osEventFlagsClear(gun_data_flag, 0x10);
+				}
+			}
+			else
+			{
+				// If teleoperating, fire based purely on right switch
+				osEventFlagsWait(gun_data_flag, 0x10, osFlagsWaitAll, 100);
+				pewpew(canone_data.FEEDER);
+				osEventFlagsClear(gun_data_flag, 0x10);
+			}
 		}
 		//otherwise kill the launcher
 		else
 		{
-			pwm_output(-1,400);
+			// If not one sec has passed since the last feeding of launcher, continue spinning flywheel to prevent jamming unless the killswitch is flipped
+			if (last_fed_time + 1000 > HAL_GetTick() && last_fed_time != 0)
+			{
+				// If kill switch is triggered, kill flywheels as well
+				if (remote_cmd.left_switch == kill)
+				{
+					pwm_output(-1, 400);
+				}
+				else
+				{
+					pwm_output(-1, 1300);
+				}
+			}
+			else
+			{
+				pwm_output(-1, 400);
+			}
 			speed_pid(0, canone_data.FEEDER[0].rpm, &canone_data.FEEDER[0].pid);
 			speed_pid(0, canone_data.FEEDER[1].rpm, &canone_data.FEEDER[1].pid);
 			CANone_cmd(canone_data.FEEDER[0].pid.output,canone_data.FEEDER[1].pid.output,0,0, LAUNCHER_ID);
@@ -77,7 +112,7 @@ void gun_control_task(void *argument)
 	osThreadTerminate(NULL);
 }
 
-void launcher_control(motor_data_t *feeders)
+void pewpew(motor_data_t *feeders)
 {
 	int16_t feeder_output[2];
 
@@ -92,6 +127,8 @@ void launcher_control(motor_data_t *feeders)
 		}
 		if (start_time[i] + 1000 < HAL_GetTick()) //If more than 1 s has passed since the fire command has been given,and flywheel has charged for 1s, feed
 		{
+			//since launcher has fired, might need to be cleared after firing stops
+			last_fed_time = HAL_GetTick();
 			if (fabs(feeders[i].torque) > FEEDER_JAM_TORQUE)
 			{
 				unjamming[i] = 1;
